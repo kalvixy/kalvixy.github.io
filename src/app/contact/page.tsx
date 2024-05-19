@@ -8,12 +8,13 @@ import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import picture from "../../photos/contact/john_sidewalk.jpeg"
 import Image from 'next/image';
+import Title from '@/components/Title';
 
 export default function Page() {
   return (
     <Layout>
       <div className='flex items-center flex-col'>
-        <div className="text-5xl mb-8">Contact</div>
+        <Title>Contact</Title>
         <div className='flex flex-row space-x-12 items-center flex-wrap'>
             <Image src={picture} width={300} alt="Piture of John Fukuda"/>
             <div>
