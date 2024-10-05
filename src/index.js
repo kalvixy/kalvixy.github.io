@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import Construction from "./pages/Construction";
 
 export default function App() {
@@ -10,11 +10,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Construction />}>
           {/**
-           * 
-           *           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-
-           */}
+           *       
+           * <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path="about" element={<About />} />
+              </Route>
+            </Routes>
+          */}
         </Route>
       </Routes>
     </BrowserRouter>

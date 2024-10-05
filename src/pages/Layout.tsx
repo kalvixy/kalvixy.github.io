@@ -1,30 +1,42 @@
 import { Outlet, Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../css/App.css";
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 const Layout = () => {
   const isMobile = useMediaQuery({ maxWidth: "980px" });
   const [showMenu, setShowMenu] = useState(false);
 
+  const sideMenu: CSSProperties = {
+    padding: "8px",
+    display: "flex",
+    flexDirection: "row", 
+    alignItems: "center"
+  }
 
-
-  const toggleMenu = () => {
+  const toggleMenu = (showMenu: boolean) => {
     console.log('toggleee')
-    setShowMenu(!showMenu);
+    setShowMenu(showMenu);
   }
 
   const renderLinks = () => {
 
-    const styleOverride = isMobile ? "menu-overlay" : "";
+    const mobileStyles: CSSProperties = {
+      display: "flex",
+      flexDirection: "column",
+    }
+
+    const styleOverride = isMobile ? mobileStyles : undefined;
 
     return (
-      <ul>
-      <li className={styleOverride}>
-        <Link to="/">Home</Link>
+      <ul style={styleOverride} >
+      <li >
+        <Link to="/" onClick={() => toggleMenu(false)}>Home</Link>
       </li>
-      <li className={styleOverride}>
-        <Link to="/about">About</Link>
+      <li >
+        <Link to="/about" onClick={() => toggleMenu(false)}>About</Link>
       </li>
     </ul>
     )
@@ -33,7 +45,7 @@ const Layout = () => {
   return (
     <>
       <header id="header">
-        <h1>The Fukuda</h1>
+        <img src={require("../images/logo.png")} style={{padding: "8px"}}/>
         <nav className="links">
           {renderLinks()}
         </nav>
@@ -41,7 +53,7 @@ const Layout = () => {
           <nav className="main">
             <ul>
               <li className="menu">
-                <a className="fa-bars" href="#menu-overlay" onClick={toggleMenu}>
+                <a className="fa-bars" onClick={() => toggleMenu(true)}>
                   Menu
                 </a>
               </li>
@@ -50,7 +62,8 @@ const Layout = () => {
         )}
         {showMenu && isMobile && (
           <div className="menu-overlay">
-            <a className="fa-times" href="#" onClick={toggleMenu}>
+            <a onClick={() => toggleMenu(false)} style={sideMenu}>
+              <FontAwesomeIcon icon={faX} style={{margin: "0 8px"}} />
               Close
             </a>
             <nav>
